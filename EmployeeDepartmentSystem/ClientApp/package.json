@@ -1,0 +1,39 @@
+{
+  "version": "1.0.0",
+  "name": "asp.net",
+  "private": true,
+  "author": "TkachenkoDmitry",
+  "scripts": {
+    "ng": "ng",
+    "start": "echo hello && ng serve --progress=false",
+    "build": "ng build"
+  },
+  "dependencies": {
+    "@angular/animations": "10.1.0-next.1",
+    "@angular/cdk": "10.1.0",
+    "@angular/common": "10.1.0-next.1",
+    "@angular/compiler": "10.1.0-next.1",
+    "@angular/core": "10.1.0-next.1",
+    "@angular/forms": "10.1.0-next.1",
+    "@angular/material": "10.1.0",
+    "@angular/platform-browser": "10.1.0-next.1",
+    "@angular/platform-browser-dynamic": "10.1.0-next.1",
+    "@angular/router": "10.1.0-next.1",
+    "rxjs": "7.0.0-beta.2",
+    "zone.js": "0.10.3",
+    "bootstrap": "5.0.0-alpha1",
+    "core-js": "3.6.5",
+    "hammerjs": "2.0.8",
+    "jquery": "3.5.1",
+    "popper.js": "2.0.0-next.4",
+    "ajv": "6.12.3",
+    "aspnet-prerendering": "3.0.1"
+  },
+  "devDependencies": {
+    "@angular-devkit/build-angular": "0.1001.0-next.1",
+    "@angular/cli": "10.1.0-next.1",
+    "@angular/compiler-cli": "10.1.0-next.1",
+    "@types/node": "14.0.24",
+    "typescript": "4.0.2"
+  }
+}

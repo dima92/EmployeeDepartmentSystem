@@ -1,0 +1,55 @@
+﻿﻿<div *ngIf="status;else unset">
+    <h3>Подразделения</h3>
+    <div>
+        <input type="button" value="Добавить" class="btn btn-success" (click)="add()" />
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <td>Наименование отдела</td>
+                </tr>
+                <tr>
+                    <td>
+                        <mat-form-field style="width: 120px !important;">
+                            <input matInput placeholder="фильтр по наименованию" [(ngModel)]="filter.name" [ngModelOptions]="{standalone: true}" (keyup)="filterForm()">
+                        </mat-form-field>
+                    </td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let department of departments">
+                    <td>{{department.name}}</td>
+                    <td>
+                        <button class="btn btn-sm btn-primary" (click)="edit(department)">Изменить</button>
+                        <button class="btn btn-sm btn-danger" (click)="deleteDepartment(department.id)" style="margin-left:20px;">Удалить</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<ng-template #unset>
+    <div>
+        <h3>{{isNew ? 'Добавление подразделения' : 'Редактирование подразделения'}}</h3>
+        <div align="center" style="width: 100%">
+            <div align="left" style="width: 50%">
+                <form method="get" name="addEditForm">
+                    <div>
+                        <mat-form-field class="example-full-width">
+                            <input matInput placeholder="Введите наименование подразделения" required [(ngModel)]="departmentObj.name" [ngModelOptions]="{standalone: true}" />
+                        </mat-form-field>
+                    </div>
+                    <div *ngIf="isNew;else unset">
+                        <button mat-button mat-raised-button color="primary" (click)="createDepartment(departmentObj)">Добавить</button>
+                        <button mat-button mat-raised-button color="warn" (click)="cancel()" style="margin-left:20px">Отмена</button>
+                    </div>
+                    <ng-template #unset>
+                        <div>
+                            <button mat-button mat-raised-button color="primary" (click)="save(departmentObj)">Сохранить</button>
+                            <button mat-button mat-raised-button color="warn" (click)="cancel()" style="margin-left:20px">Отмена</button>
+                        </div>
+                    </ng-template>
+                </form>
+            </div>
+        </div>
+    </div>
+</ng-template>

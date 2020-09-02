@@ -1,0 +1,102 @@
+﻿﻿<div *ngIf="status;else unset">
+    <h3>Сотрудники</h3>
+    <div>
+        <input type="button" value="Добавить" class="btn btn-success" (click)="add()" />
+        <button class="btn btn-sm btn-info" title=" в console" (click)="serializable(employee)" style="margin-left:20px;">Сериализация</button>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <td>Имя</td>
+                    <td>Фамилия</td>
+                    <td>Адрес</td>
+                    <td>Телефон</td>
+                    <td>Должность</td>
+                    <td>Отдел</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <mat-form-field style="width: 120px !important;">
+                            <input matInput placeholder="фильтр по отделу" [(ngModel)]="filter.departments" [ngModelOptions]="{standalone: true}" (keyup)="filterForm()" />
+                        </mat-form-field>
+                    </td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let employee of employees">
+                    <td>{{employee.name}}</td>
+                    <td>{{employee.lastName}}</td>
+                    <td>{{employee.address}}</td>
+                    <td>{{employee.number}}</td>
+                    <td>{{employee.position}}</td>
+                    <td>{{employee.departments}}</td>
+                    <td>
+                        <button class="btn btn-sm btn-primary" (click)="edit(employee)">Изменить</button>
+                        <button class="btn btn-sm btn-danger" (click)="deleteEmployee(employee.id)" style="margin-left:20px;">Удалить</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<ng-template #unset>
+    <div>
+        <h3>{{isNew ? 'Добавление сотрудника' : 'Редактирование сотрудника'}}</h3>
+        <div align="center" style="width: 100%">
+            <div align="left" style="width: 50%">
+                <form method="get" name="addEditForm">
+                    <div>
+                        <div>
+                            <mat-form-field class="example-full-width">
+                                <input matInput placeholder="Введите имя" required [(ngModel)]="employeeObj.name" [ngModelOptions]="{standalone: true}" />
+                            </mat-form-field>
+                        </div>
+                        <div>
+                            <mat-form-field class="example-full-width">
+                                <input matInput placeholder="Введите фамилию" required [(ngModel)]="employeeObj.lastname" [ngModelOptions]="{standalone: true}" />
+                            </mat-form-field>
+                        </div>
+                        <div>
+                            <mat-form-field class="example-full-width">
+                                <input matInput placeholder="Введите адрес" required [(ngModel)]="employeeObj.address" [ngModelOptions]="{standalone: true}" />
+                            </mat-form-field>
+                        </div>
+                        <div>
+                            <mat-form-field class="example-full-width">
+                                <input matInput placeholder="Введите телефон" required [(ngModel)]="employeeObj.number" [ngModelOptions]="{standalone: true}" />
+                            </mat-form-field>
+                        </div>
+                        <div>
+                            <mat-form-field class="example-full-width">
+                                <input matInput placeholder="Введите должность" required [(ngModel)]="employeeObj.position" [ngModelOptions]="{standalone: true}" />
+                            </mat-form-field>
+                        </div>
+                        <div>
+                            <mat-form-field>
+                                <mat-label>Подразделения</mat-label>
+                                <select matNativeControl required [(ngModel)]="employeeObj.departmentId" [ngModelOptions]="{standalone: true}">
+                                    <option label="-- Выберите подразделение --"></option>
+                                    <option *ngFor="let department of departments" [value]="department.id">{{department.name}}</option>
+                                </select>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div *ngIf="isNew;else unset">
+                        <button mat-button mat-raised-button color="primary" (click)="createEmployee(employeeObj)">Добавить</button>
+                        <button mat-button mat-raised-button color="warn" (click)="cancel()" style="margin-left:20px">Отмена</button>
+                    </div>
+                    <ng-template #unset>
+                        <div>
+                            <button mat-button mat-raised-button color="primary" (click)="save(employeeObj)">Сохранить</button>
+                            <button mat-button mat-raised-button color="warn" (click)="cancel()" style="margin-left:20px">Отмена</button>
+                        </div>
+                    </ng-template>
+                </form>
+            </div>
+        </div>
+    </div>
+</ng-template>
